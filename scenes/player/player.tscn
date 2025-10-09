@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://l1q7ph8ihg0c"]
+[gd_scene load_steps=7 format=3 uid="uid://l1q7ph8ihg0c"]
 
 [ext_resource type="Texture2D" uid="uid://chwlrkcaiuys4" path="res://assets/bjorn-v1.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://c6fxvojs3nq2" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="PackedScene" uid="uid://0hu1tes5lllb" path="res://scenes/debug/debug_logger.tscn" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://deahdn5e6lopp" path="res://scenes/state_machine/state_machine.tscn" id="3_lvxji"]
+[ext_resource type="Script" uid="uid://h36a247urn2j" path="res://scenes/player/player_state_machine/player_state_machine.gd" id="4_p47bc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 4.0
@@ -17,3 +20,9 @@ shape = SubResource("CapsuleShape2D_dovo2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("1_8afob")
+
+[node name="PlayerStateMachine" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_lvxji")]
+script = ExtResource("4_p47bc")
+player = NodePath("..")
+
+[node name="DebugLogger" parent="." instance=ExtResource("3_gmlin")]

@@ -4,29 +4,28 @@ class_name Player
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var state_machine: StateMachine = $PlayerStateMachine
+@onready var debug_logger: Control = $DebugLogger
 
 const GRAVITY = 1200 # pixels per second
-const MAX_SPEED = 400
+const MAX_SPEED = 100
 const MAX_JUMP = 300
-const ACCELERATION = 200
-const DECELERATION = 400
+const ACCELERATION = 250
+const DECELERATION = 500
+
+var states = {}
 
 
 var facing_direction = Vector2.ONE
 
-var x_state = x_states.IDLE
-
-enum x_states {
-	IDLE,
-	WALKING,
-	RUNNING
-}
 
 func _ready() -> void:
 	pass
+
 	
 
 func _process(delta: float) -> void:
+	debug_logger.log("State: " + str(state_machine.current_state.state_name), self)
 #	Flip the sprite to face the movement direction
 	var move_sign = sign(velocity.x)
 	if move_sign == 0:
@@ -42,23 +41,6 @@ func _physics_process(delta: float) -> void:
 	if ! is_on_floor():
 	#	Apply gravity
 		velocity.y += GRAVITY * delta
-	
-		#x_state = x_states.WALKING
-		#set_x_velocity(delta)
-	if Input.is_action_just_pressed("jump"):
-		jump()
-		
-	var right_pressed = Input.is_action_pressed("right")
-	var left_pressed = Input.is_action_pressed("left")
-	if right_pressed && left_pressed:
-		decelerate_x(delta)
-	elif right_pressed || left_pressed:
-		if is_on_floor():
-			x_state = x_states.WALKING
-			accelerate_x(delta)
-	else:
-		if is_on_floor():
-			decelerate_x(delta)
 	
 	move_and_slide()
 
@@ -83,8 +65,3 @@ func decelerate_x(delta: float):
 					velocity.x += DECELERATION * delta
 				else:
 					velocity.x -= DECELERATION * delta
-		else:
-			x_state = x_states.IDLE
-func jump():
-	if is_on_floor():
-		velocity.y -= MAX_JUMP
