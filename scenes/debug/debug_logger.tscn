@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://0hu1tes5lllb"]
+
+[ext_resource type="Script" uid="uid://djbfebcw710jp" path="res://scenes/debug/debug_logger.gd" id="1_7b50k"]
+
+[node name="DebugLogger" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7b50k")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -23.0
+offset_right = 21.0
+theme_override_font_sizes/font_size = 8
+text = "State: IDLE"

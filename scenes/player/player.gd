@@ -7,11 +7,14 @@ class_name Player
 @onready var state_machine: StateMachine = $PlayerStateMachine
 @onready var debug_logger: Control = $DebugLogger
 
-const GRAVITY = 1200 # pixels per second
-const MAX_SPEED = 100
+const FALL_GRAVITY = 1500 # pixels per second
+const JUMP_GRAVITY = 1000
 const MAX_JUMP = 300
-const ACCELERATION = 250
-const DECELERATION = 500
+const MAX_SPEED = 100
+const ACCELERATION = 300
+const DECELERATION = 600
+# Number of physics frames allowed to pass before player can no longer jump after walking off the floor
+const JUMP_FRAME_TOLERANCE = 10
 
 var states = {}
 
@@ -37,11 +40,7 @@ func _process(delta: float) -> void:
 		sprite.scale = facing_direction
 
 # Physics process is independent of the frame rate
-func _physics_process(delta: float) -> void:
-	if ! is_on_floor():
-	#	Apply gravity
-		velocity.y += GRAVITY * delta
-	
+func _physics_process(delta: float) -> void:	
 	move_and_slide()
 
 func accelerate_x(delta: float):
