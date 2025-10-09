@@ -12,26 +12,35 @@ func exit():
 	
 ## Update the physics based on the current state
 func update(delta: float):
-	var right_pressed = Input.is_action_pressed("right")
-	var left_pressed = Input.is_action_pressed("left")
-	
+
 	if ! has_jumped:
-		player.velocity.y -= player.MAX_JUMP
-		Utils.await_physics_frames(5, player)
-		has_jumped = true
+		jump()
 	
 	if ! player.is_on_floor():
-	#	Apply gravity
-		player.velocity.y += player.JUMP_GRAVITY * delta
+		apply_gravity(delta)
 		
 	if ! player.is_on_floor() && has_jumped:
 		if player.velocity.y >= 0:
 			state_machine.change_state(state_machine.states.fall)
 			return
 	
+	apply_airlial_movement(delta)
+			
+func apply_gravity(delta: float):
+		#	Apply gravity
+		player.velocity.y += player.JUMP_GRAVITY * delta
+		
+func apply_airlial_movement(delta: float):
+	var right_pressed = Input.is_action_pressed("right")
+	var left_pressed = Input.is_action_pressed("left")
 #		If the player is in the air	
 #		Insert unique in-air movement here		
-		if right_pressed && left_pressed:
-			player.decelerate_x(delta)
-		elif right_pressed || left_pressed:
-			player.accelerate_x(delta)
+	if right_pressed && left_pressed:
+		player.decelerate_x(delta)
+	elif right_pressed || left_pressed:
+		player.accelerate_x(delta)
+		
+func jump():
+	player.velocity.y -= player.MAX_JUMP
+	Utils.await_physics_frames(5, player)
+	has_jumped = true

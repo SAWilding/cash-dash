@@ -18,6 +18,11 @@ func update(delta: float):
 		state_machine.change_state(state_machine.states.jump)
 		return
 		
+
+	apply_floor_movement(delta)
+	
+	
+func apply_floor_movement(delta: float):
 	var right_pressed = Input.is_action_pressed("right")
 	var left_pressed = Input.is_action_pressed("left")
 	
@@ -28,6 +33,3 @@ func update(delta: float):
 	else:
 		state_machine.change_state(state_machine.states.idle)
 		return
-
-	
-		

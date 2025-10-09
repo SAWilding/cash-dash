@@ -4,7 +4,6 @@ extends State
 ## Called when the state is first entered
 func enter(): 
 	if state_machine.previous_state == state_machine.states.fall:
-		print("previous state was fall")
 		player.velocity.x = 0
 
 ## Called upon leaving the state to another
