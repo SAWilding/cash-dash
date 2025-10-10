@@ -6,6 +6,7 @@ class_name Player
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var state_machine: StateMachine = $PlayerStateMachine
 @onready var debug_logger: Control = $DebugLogger
+@onready var health_component: HealthComponent = $HealthComponent
 
 const FALL_GRAVITY = 1500 # pixels per second
 const JUMP_GRAVITY = 1000
@@ -29,6 +30,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	debug_logger.log("State: " + str(state_machine.current_state.state_name), self)
+	debug_logger.append_log("Health: " + str(health_component.current_health))
 #	Flip the sprite to face the movement direction
 	var move_sign = sign(velocity.x)
 	if move_sign == 0:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://0hu1tes5lllb"]
 
-[ext_resource type="Script" uid="uid://djbfebcw710jp" path="res://scenes/debug/debug_logger.gd" id="1_7b50k"]
+[ext_resource type="Script" uid="uid://djbfebcw710jp" path="res://utils/debug/debug_logger.gd" id="1_7b50k"]
 
 [node name="DebugLogger" type="Control"]
 layout_mode = 3

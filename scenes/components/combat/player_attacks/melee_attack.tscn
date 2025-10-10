@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckn0ktfwp1vrw"]
+
+[ext_resource type="Script" uid="uid://misr6qh4b8is" path="res://scenes/components/combat/player_attacks/melee_attack.gd" id="1_5usv2"]
+[ext_resource type="PackedScene" uid="uid://cr88pyuivelxg" path="res://scenes/components/hit_box/hit_box_component.tscn" id="1_ngrtk"]
+[ext_resource type="Texture2D" uid="uid://0nltanef15a5" path="res://scenes/components/combat/player_attacks/tile_0103.png" id="3_lnchm"]
+
+[sub_resource type="Animation" id="Animation_eb72h"]
+resource_name = "attack"
+length = 0.4
+step = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-10, 0), Vector2(10, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBoxComponent:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-10, 0), Vector2(10, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lnchm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBoxComponent:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bbst4"]
+_data = {
+&"RESET": SubResource("Animation_lnchm"),
+&"attack": SubResource("Animation_eb72h")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5usv2"]
+size = Vector2(14, 10)
+
+[node name="MeleeAttack" type="Node2D"]
+script = ExtResource("1_5usv2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("3_lnchm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bbst4")
+}
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("1_ngrtk")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_5usv2")
