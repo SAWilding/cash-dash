@@ -8,7 +8,6 @@ const CAMERA_SMOOTHING = 5 # the smaller the smoother
 func _ready() -> void:
 	make_current() # Set to the current camera
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	acquire_target()

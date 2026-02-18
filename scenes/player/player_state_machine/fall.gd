@@ -34,7 +34,6 @@ func update(delta: float):
 func apply_jump_tolerance():
 		jump_tolerance_entered = true
 		for frame in range(parent.JUMP_FRAME_TOLERANCE):
-			print("In jump window")
 			await parent.get_tree().physics_frame
 			if parent.is_on_floor():
 				break
@@ -55,3 +54,4 @@ func apply_airlial_movement(right_pressed: bool , left_pressed: bool, delta: flo
 func apply_gravity(delta: float):
 	#	Apply gravity
 	parent.velocity.y += parent.FALL_GRAVITY * delta
+	parent.velocity.y = clamp(parent.velocity.y, -parent.MAX_JUMP, parent.MAX_FALL_SPEED)

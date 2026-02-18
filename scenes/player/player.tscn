@@ -1,46 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://l1q7ph8ihg0c"]
+[gd_scene format=3 uid="uid://l1q7ph8ihg0c"]
 
 [ext_resource type="Texture2D" uid="uid://chwlrkcaiuys4" path="res://assets/bjorn-v1.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://c6fxvojs3nq2" path="res://scenes/player/player.gd" id="1_dovo2"]
-[ext_resource type="PackedScene" uid="uid://lxeyjfm46ybu" path="res://scenes/components/health/health_component.tscn" id="2_0owmy"]
-[ext_resource type="PackedScene" uid="uid://swbfbdsbpmya" path="res://scenes/components/hurt_box/hurt_box_component.tscn" id="2_75vfm"]
-[ext_resource type="PackedScene" uid="uid://bqf5bny07t45c" path="res://scenes/managers/combat/combat_manager.tscn" id="2_qek5x"]
 [ext_resource type="PackedScene" uid="uid://0hu1tes5lllb" path="res://utils/debug/debug_logger.tscn" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://deahdn5e6lopp" path="res://scenes/components/state_machine/state_machine.tscn" id="3_lvxji"]
 [ext_resource type="Script" uid="uid://h36a247urn2j" path="res://scenes/player/player_state_machine/player_state_machine.gd" id="4_p47bc"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
-radius = 4.0
-height = 12.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 4.0
 height = 12.0
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=127058708 groups=["player"]]
 script = ExtResource("1_dovo2")
 
-[node name="CombatManager" parent="." instance=ExtResource("2_qek5x")]
-
-[node name="HealthComponent" parent="." instance=ExtResource("2_0owmy")]
-
-[node name="HurtBoxComponent" parent="." instance=ExtResource("2_75vfm")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-position = Vector2(-1, -6)
-shape = SubResource("CapsuleShape2D_0owmy")
-debug_color = Color(0.69975686, 0.035552863, 0.25602064, 0.41960785)
-
-[node name="PlayerStateMachine" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_lvxji")]
+[node name="PlayerStateMachine" parent="." unique_id=225161146 node_paths=PackedStringArray("player") instance=ExtResource("3_lvxji")]
 script = ExtResource("4_p47bc")
 player = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1321021825]
 position = Vector2(-1, -6)
 shape = SubResource("CapsuleShape2D_dovo2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1284630034]
 position = Vector2(0, -8)
 texture = ExtResource("1_8afob")
 
-[node name="DebugLogger" parent="." instance=ExtResource("3_gmlin")]
+[node name="DebugLogger" parent="." unique_id=550579440 instance=ExtResource("3_gmlin")]

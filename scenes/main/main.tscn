@@ -1,17 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckaferqfmqqc5"]
+[gd_scene format=3 uid="uid://ckaferqfmqqc5"]
 
 [ext_resource type="PackedScene" uid="uid://l1q7ph8ihg0c" path="res://scenes/player/player.tscn" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://fvu8kskj06dg" path="res://scenes/tiles/test/tile_map_layer.tscn" id="2_iuonh"]
 [ext_resource type="PackedScene" uid="uid://dyaypssubksaq" path="res://utils/debug/fps_counter.tscn" id="3_k2fmo"]
 [ext_resource type="PackedScene" uid="uid://bv1suvrfjks0t" path="res://scenes/camera/game_camera.tscn" id="4_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://3uop1uyckbwk" path="res://scenes/level_building/door/door.tscn" id="5_6q06x"]
+[ext_resource type="PackedScene" uid="uid://dk5om74glxw6k" path="res://scenes/level_building/levels/level.tscn" id="6_ow5a4"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1421400260]
 
-[node name="FpsCounter" parent="." instance=ExtResource("3_k2fmo")]
+[node name="FpsCounter" parent="." unique_id=1907787027 instance=ExtResource("3_k2fmo")]
 
-[node name="TileMapLayer" parent="." instance=ExtResource("2_iuonh")]
+[node name="TileMapLayer" parent="." unique_id=1489687612 instance=ExtResource("2_iuonh")]
 
-[node name="Player" parent="." instance=ExtResource("1_hyk8p")]
+[node name="Player" parent="." unique_id=1472650243 instance=ExtResource("1_hyk8p")]
 position = Vector2(485, 181)
 
-[node name="GameCamera" parent="." instance=ExtResource("4_l3cfh")]
+[node name="GameCamera" parent="." unique_id=41269483 instance=ExtResource("4_l3cfh")]
+
+[node name="Door" parent="." unique_id=329413602 instance=ExtResource("5_6q06x")]
+position = Vector2(8, 224)
+scene = ExtResource("6_ow5a4")
