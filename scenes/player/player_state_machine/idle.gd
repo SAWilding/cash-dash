@@ -3,11 +3,11 @@ extends State
 		
 ## Called when the state is first entered
 func enter(): 
-	pass
+	parent.animation_player.play("idle")
 
 ## Called upon leaving the state to another
 func exit(): pass
-
+	
 ## Update the physics based on the current state
 func update(delta: float): 
 	var right_pressed = Input.is_action_pressed("right")

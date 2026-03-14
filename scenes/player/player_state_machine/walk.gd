@@ -2,10 +2,12 @@ extends State
 	
 var velocity = Vector2()
 ## Called when the state is first entered
-func enter(): pass
-	
+func enter(): 
+	parent.animation_player.play("walk")
+
 ## Called upon leaving the state to another
-func exit(): pass
+func exit(): 
+	parent.animation_player.stop(false)
 
 ## Update the physics based on the current state
 func update(delta: float):
