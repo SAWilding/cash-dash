@@ -7,11 +7,11 @@ class_name Player
 @onready var state_machine: StateMachine = $PlayerStateMachine
 @onready var debug_logger: Control = $DebugLogger
 
-const FALL_GRAVITY = 1500 # pixels per second
-const MAX_FALL_SPEED = 900
+const FALL_GRAVITY = 0 # pixels per second
+const MAX_FALL_SPEED = 0
 const JUMP_GRAVITY = 1000
 const MAX_JUMP = 300
-const MAX_SPEED = 150
+const MAX_SPEED = 50
 const ACCELERATION = 300
 const DECELERATION = 600
 # Number of physics frames allowed to pass before player can no longer jump after walking off the floor
@@ -52,7 +52,8 @@ func accelerate_x(delta: float):
 		decelerate_x(delta)
 		
 	else:
-		velocity.x += direction * ACCELERATION  * delta
+		#velocity.x += direction * ACCELERATION  * delta
+		velocity.x += direction  * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 
 func decelerate_x(delta: float):
